@@ -2,7 +2,7 @@ import urllib.request, json, csv, datetime, pathlib
 
 path = str(pathlib.Path(__file__).parent.absolute())
 
-with open(path + "\game_number.txt", "r") as f:
+with open(path + "\\game_number.txt", "r") as f:
     game_number = f.read()
 
 # game_number = 4845520221372416
@@ -81,7 +81,7 @@ players = []
 for player in range(len(data["players"])):
     players.append(data["players"][str(player)])
 
-historical = path + "\historical.txt"
+historical = path + "\\historical.txt"
 
 with open(historical, "a") as file:
     file.write(str(players))
