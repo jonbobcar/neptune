@@ -1,6 +1,10 @@
-import urllib.request, json, csv, datetime
+import urllib.request, json, csv, datetime, pathlib
 
-with open("game_number.txt", "r") as f:
+path = str(pathlib.Path(__file__).parent.absolute())
+
+print(path)
+
+with open(path + "\game_number.txt", "r") as f:
     game_number = f.read()
 
 # game_number = 4845520221372416
@@ -24,10 +28,6 @@ class Player():
         self.banking = data["players"][uid]["tech"]["banking"]["level"]
         self.manufacturing = data["players"][uid]["tech"]["manufacturing"]["level"]
 
-# players = []
-# for player in range(len(data["players"])):
-#     players.append(Player(player))
-
 fieldnames = [
     "alias",
     "total_stars",
@@ -42,7 +42,7 @@ fieldnames = [
     "manufacturing"
 ]
 
-file_name = "neptune.csv"
+file_name = path + "\\neptune.csv"
 
 with open(file_name, "w") as write_file:
     csv_writer = csv.DictWriter(write_file, fieldnames=fieldnames)
@@ -65,6 +65,7 @@ for player in range(len(data["players"])):
         "banking":          data["players"][player]["tech"]["banking"]["level"],
         "manufacturing":    data["players"][player]["tech"]["manufacturing"]["level"],
     })
+
 with open(file_name, "a") as write_file:
     csv_writer = csv.DictWriter(write_file, fieldnames=fieldnames)
     for row in write_line:
@@ -76,3 +77,13 @@ with open(file_name, "r") as file:
 with open(file_name, "w") as file:
     file.write(datetime.datetime.now().strftime("%A %H:%M\n"))
     file.write(table)
+
+players = []
+
+for player in range(len(data["players"])):
+    players.append(data["players"][str(player)])
+
+historical = path + "\historical.txt"
+
+with open(historical, "a") as file:
+    file.write(str(players))
