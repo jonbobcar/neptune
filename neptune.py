@@ -1,6 +1,9 @@
 import urllib.request, json, csv, datetime
 
-game_number = 4845520221372416
+with open("game_number.txt", "r") as f:
+    game_number = f.read()
+
+# game_number = 4845520221372416
 url = "http://nptriton.cqproject.net/game/" + str(game_number) + "/full"
 
 with urllib.request.urlopen(url) as url:
@@ -21,9 +24,9 @@ class Player():
         self.banking = data["players"][uid]["tech"]["banking"]["level"]
         self.manufacturing = data["players"][uid]["tech"]["manufacturing"]["level"]
 
-players = []
-for player in range(len(data["players"])):
-    players.append(Player(player))
+# players = []
+# for player in range(len(data["players"])):
+#     players.append(Player(player))
 
 fieldnames = [
     "alias",
@@ -66,3 +69,10 @@ with open(file_name, "a") as write_file:
     csv_writer = csv.DictWriter(write_file, fieldnames=fieldnames)
     for row in write_line:
         csv_writer.writerow(row)
+
+with open(file_name, "r") as file:
+    table = file.read()
+
+with open(file_name, "w") as file:
+    file.write(datetime.datetime.now().strftime("%A %H:%M\n"))
+    file.write(table)
