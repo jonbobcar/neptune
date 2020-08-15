@@ -1,8 +1,10 @@
-import urllib.request, json, csv, datetime, pathlib
+# url = "http://nptriton.cqproject.net/game/4845520221372416/full"
 
-path = str(pathlib.Path(__file__).parent.absolute())
+import urllib.request, json, csv, datetime, pathlib, os
 
-with open(path + "\\game_number.txt", "r") as f:
+path = str(pathlib.Path(__file__).parent.absolute()) + "\\"
+
+with open(path + "game_number.txt", "r") as f:
     game_number = f.read()
 
 # game_number = 4845520221372416
@@ -18,6 +20,9 @@ class Player():
         self.systems = data["players"][uid]["total_stars"]
         self.ships = data["players"][uid]["total_strength"]
         self.carriers = data["players"][uid]["total_fleets"]
+        self.total_economy = data["players"][player]["total_economy"]
+        self.total_industry = data["players"][player]["total_industry"]
+        self.total_science = data["players"][player]["total_science"]
         self.scanning = data["players"][uid]["tech"]["scanning"]["level"]
         self.range = data["players"][uid]["tech"]["propulsion"]["level"]
         self.terraforming = data["players"][uid]["tech"]["terraforming"]["level"]
@@ -26,11 +31,46 @@ class Player():
         self.banking = data["players"][uid]["tech"]["banking"]["level"]
         self.manufacturing = data["players"][uid]["tech"]["manufacturing"]["level"]
 
+class Board():
+    def __init__(self):
+        self.stars = data["stars"]
+        self.tick = datetime.datetime.now().strftime("%Y%m%d %H")
+
+stars_file = path + "stars.txt"
+file_exists = os.path.isfile(stars_file)
+
+if file_exists:
+    with open(path + "stars.txt", "r") as file:
+        past_board = json.loads(file.read())
+
+now_board = Board()
+
+
+for star in past_board:
+    if past_board[str(star)]["puid"] is not now_board.stars[str(star)]["puid"]:
+        with open(path + "trades.txt", "a") as file:
+            change = str(
+                datetime.datetime.now().strftime("%Y/%m/%d %H:") + "53" + " - " +
+                past_board[str(star)]["n"] + " - " +
+                data["players"][str(past_board[str(star)]["puid"])]["alias"] + 
+                " -> " +
+                data["players"][str(now_board.stars[str(star)]["puid"])]["alias"] + "\n"
+            )
+            file.write(change)    
+        print(change)
+
+with open(path + "stars.txt", "w") as file:
+     file.write(json.dumps(now_board.stars))
+
+
 fieldnames = [
     "alias",
     "total_stars",
     "total_strength",
     "total_fleets",
+    "total_economy",
+    "total_industry",
+    "total_science",
     "scanning",
     "propulsion",
     "terraforming",
@@ -55,6 +95,9 @@ for player in range(len(data["players"])):
         "total_stars":      data["players"][player]["total_stars"],
         "total_strength":   data["players"][player]["total_strength"],
         "total_fleets":     data["players"][player]["total_fleets"],
+        "total_economy":    data["players"][player]["total_economy"],
+        "total_industry":   data["players"][player]["total_industry"],
+        "total_science":    data["players"][player]["total_science"],
         "scanning":         data["players"][player]["tech"]["scanning"]["level"],
         "propulsion":       data["players"][player]["tech"]["propulsion"]["level"],
         "terraforming":     data["players"][player]["tech"]["terraforming"]["level"],
@@ -76,12 +119,17 @@ with open(file_name, "w") as file:
     file.write(datetime.datetime.now().strftime("%A %H:%M\n"))
     file.write(table)
 
-players = []
+players = {datetime.datetime.now().strftime("%Y%m%d %H"):
+            data["players"]}
 
-for player in range(len(data["players"])):
-    players.append(data["players"][str(player)])
+historical = path + "historical.txt"
 
-historical = path + "\\historical.txt"
+file_exists = os.path.isfile(historical)
 
-with open(historical, "a") as file:
-    file.write(str(players))
+if file_exists:
+    with open(historical, "r") as file:
+        players_history = json.loads(file.read())
+        players.update(players_history)
+
+with open(historical, "w") as file:
+    file.write(json.dumps(players, indent=2))
