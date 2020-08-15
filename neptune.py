@@ -2,7 +2,7 @@
 
 import urllib.request, json, csv, datetime, pathlib, os
 
-path = str(pathlib.Path(__file__).parent.absolute()) + "\\"
+path = str(pathlib.Path(__file__).parent.absolute()) + "/"
 
 with open(path + "game_number.txt", "r") as f:
     game_number = f.read()
