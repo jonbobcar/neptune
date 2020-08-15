@@ -39,28 +39,27 @@ class Board():
 stars_file = path + "stars.txt"
 file_exists = os.path.isfile(stars_file)
 
+now_board = Board()
+
 if file_exists:
     with open(path + "stars.txt", "r") as file:
         past_board = json.loads(file.read())
 
-now_board = Board()
-
-
-for star in past_board:
-    if past_board[str(star)]["puid"] is not now_board.stars[str(star)]["puid"]:
-        with open(path + "trades.txt", "a") as file:
-            change = str(
-                datetime.datetime.now().strftime("%Y/%m/%d %H:") + "53" + " - " +
-                past_board[str(star)]["n"] + " - " +
-                data["players"][str(past_board[str(star)]["puid"])]["alias"] + 
-                " -> " +
-                data["players"][str(now_board.stars[str(star)]["puid"])]["alias"] + "\n"
-            )
-            file.write(change)    
-        print(change)
+    for star in past_board:
+        if past_board[str(star)]["puid"] is not now_board.stars[str(star)]["puid"]:
+            with open(path + "trades.txt", "a") as file:
+                change = str(
+                    datetime.datetime.now().strftime("%Y/%m/%d %H:") + "53" + " - " +
+                    past_board[str(star)]["n"] + " - " +
+                    data["players"][str(past_board[str(star)]["puid"])]["alias"] + 
+                    " -> " +
+                    data["players"][str(now_board.stars[str(star)]["puid"])]["alias"] + "\n"
+                )
+                file.write(change)    
+            print(change)
 
 with open(path + "stars.txt", "w") as file:
-     file.write(json.dumps(now_board.stars))
+    file.write(json.dumps(now_board.stars))
 
 
 fieldnames = [
@@ -80,7 +79,7 @@ fieldnames = [
     "manufacturing"
 ]
 
-file_name = path + "\\neptune.csv"
+file_name = path + "neptune.csv"
 
 with open(file_name, "w") as write_file:
     csv_writer = csv.DictWriter(write_file, fieldnames=fieldnames)
