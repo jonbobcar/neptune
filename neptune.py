@@ -51,9 +51,12 @@ if file_exists:
                 change = str(
                     datetime.datetime.now().strftime("%Y/%m/%d %H:") + "53" + " - " +
                     past_board[str(star)]["n"] + " - " +
-                    data["players"][str(past_board[str(star)]["puid"])]["alias"] + 
+                    data["players"][str(past_board[str(star)]["puid"])]["alias"] + " (" +
+                    str(data["players"][str(past_board[str(star)]["puid"])]["total_stars"]) + ")" +
                     " -> " +
-                    data["players"][str(now_board.stars[str(star)]["puid"])]["alias"] + "\n"
+                    data["players"][str(now_board.stars[str(star)]["puid"])]["alias"] +  " (" +
+                    str(data["players"][str(now_board.stars[str(star)]["puid"])]["total_stars"]) + ")" +
+                    "\n"
                 )
                 file.write(change)    
             print(change)
