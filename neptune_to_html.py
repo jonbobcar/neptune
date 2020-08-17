@@ -21,7 +21,7 @@ with open(path + "index.html", "w") as f:
     f.write("System Trades\n")
     f.write("</h1>\n")
     f.write("<p1>\n")
-    f.write("(Most Recent First)")
+    f.write("Most Recent First")
     for line in reversed(trades):
         f.write("<p>" + line + "</p>")
     f.write("</p1>\n")
