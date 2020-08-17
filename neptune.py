@@ -58,6 +58,7 @@ if file_exists:
                         "Unclaimed System" +
                         "\n"
                         )
+                    file.write(change)
             elif now_board.stars[str(star)]["puid"] == -1:
                 with open(path + "trades.txt", "a") as file:
                     change = str(
@@ -69,6 +70,7 @@ if file_exists:
                         "System Abandoned" +
                         "\n"
                         )
+                    file.write(change)    
             else:
                 with open(path + "trades.txt", "a") as file:
                     change = str(
@@ -81,7 +83,7 @@ if file_exists:
                         str(data["players"][str(now_board.stars[str(star)]["puid"])]["total_stars"]) + ")" +
                         "\n"
                         )
-                file.write(change)    
+                    file.write(change)    
             print(change)
 
 with open(path + "stars.txt", "w") as file:
