@@ -64,8 +64,7 @@ if file_exists:
                         datetime.datetime.now().strftime("%Y/%m/%d %H:") + "53" + " - " +
                         past_board[str(star)]["n"] + " - " +
                         data["players"][str(past_board[str(star)]["puid"])]["alias"] + " (-1; " +
-                        str(data["players"][str(past_board[str(star)]["puid"])]["total_stars"]) + ")" +
-                        " -> " +
+                        str(data["players"][str(past_board[str(star)]["puid"])]["total_stars"]) + ")" + 
                         "System Abandoned"
                         )
                 file.write(change)    
