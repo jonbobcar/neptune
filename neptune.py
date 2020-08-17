@@ -52,10 +52,10 @@ if file_exists:
                     change = str(
                         datetime.datetime.now().strftime("%Y/%m/%d %H:") + "53" + " - " +
                         past_board[str(star)]["n"] + " - " +
+                        "Unclaimed System" +
+                        " -> " +
                         data["players"][str(now_board.stars[str(star)]["puid"])]["alias"] +  " (+1; " +
                         str(data["players"][str(now_board.stars[str(star)]["puid"])]["total_stars"]) + ")" +
-                        " -> " +
-                        "Unclaimed System" +
                         "\n"
                         )
                     file.write(change)
