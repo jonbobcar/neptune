@@ -47,8 +47,30 @@ if file_exists:
 
     for star in past_board:
         if past_board[str(star)]["puid"] is not now_board.stars[str(star)]["puid"]:
-            with open(path + "trades.txt", "a") as file:
-                try:
+            if past_board[str(star)]["puid"] == -1:
+                with open(path + "trades.txt", "a") as file:
+                    change = str(
+                        datetime.datetime.now().strftime("%Y/%m/%d %H:") + "53" + " - " +
+                        past_board[str(star)]["n"] + " - " +
+                        data["players"][str(now_board.stars[str(star)]["puid"])]["alias"] +  " (+1; " +
+                        str(data["players"][str(now_board.stars[str(star)]["puid"])]["total_stars"]) + ")" +
+                        " -> " +
+                        "Unclaimed System" +
+                        "\n"
+                        )
+            elif now_board.stars[str(star)]["puid"] == -1:
+                with open(path + "trades.txt", "a") as file:
+                    change = str(
+                        datetime.datetime.now().strftime("%Y/%m/%d %H:") + "53" + " - " +
+                        past_board[str(star)]["n"] + " - " +
+                        data["players"][str(past_board[str(star)]["puid"])]["alias"] + " (-1; " +
+                        str(data["players"][str(past_board[str(star)]["puid"])]["total_stars"]) + ")" +
+                        " -> " +
+                        "System Abandoned" +
+                        "\n"
+                        )
+            else:
+                with open(path + "trades.txt", "a") as file:
                     change = str(
                         datetime.datetime.now().strftime("%Y/%m/%d %H:") + "53" + " - " +
                         past_board[str(star)]["n"] + " - " +
@@ -58,14 +80,6 @@ if file_exists:
                         data["players"][str(now_board.stars[str(star)]["puid"])]["alias"] +  " (+1; " +
                         str(data["players"][str(now_board.stars[str(star)]["puid"])]["total_stars"]) + ")" +
                         "\n"
-                        )
-                except KeyError:
-                    change = str(
-                        datetime.datetime.now().strftime("%Y/%m/%d %H:") + "53" + " - " +
-                        past_board[str(star)]["n"] + " - " +
-                        data["players"][str(past_board[str(star)]["puid"])]["alias"] + " (-1; " +
-                        str(data["players"][str(past_board[str(star)]["puid"])]["total_stars"]) + ")" + 
-                        "System Abandoned"
                         )
                 file.write(change)    
             print(change)
