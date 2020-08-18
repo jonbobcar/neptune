@@ -134,6 +134,28 @@ for player in range(len(data["players"])):
         "manufacturing":    data["players"][player]["tech"]["manufacturing"]["level"],
     })
 
+player_line = ["tick"]
+stats = ["total_stars", "total_strength", "total_economy", "total_industry", "total_science"]
+stat_line = {"tick": datetime.datetime.now()}
+
+for player in range(len(data["players"])):
+    for stat in stats:
+        stat_line.update({data["players"][str(player)]["alias"] + ": " + stat: data["players"][str(player)][stat]})
+        player_line.append(data["players"][str(player)]["alias"] + ": " + stat)
+
+file_exists = os.path.isfile(path + "stats.csv")
+
+if not file_exists:
+    with open(path + "stats.csv", "w") as write_file:
+        csv_writer = csv.DictWriter(write_file, fieldnames=player_line)
+        csv_writer.writeheader()
+        csv_writer.writerow(stat_line)
+
+else:
+    with open(path + "stats.csv", "a") as write_file:
+        csv_writer = csv.DictWriter(write_file, fieldnames=player_line)
+        csv_writer.writerow(stat_line)
+
 with open(file_name, "a") as write_file:
     csv_writer = csv.DictWriter(write_file, fieldnames=fieldnames)
     for row in write_line:
