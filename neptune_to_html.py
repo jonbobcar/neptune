@@ -18,13 +18,13 @@ with open(path + "index.html", "w") as f:
     for line in positions:
         f.write("<p>" + line + "</p>")
     
-    f.write("<p1>\n")
-    f.write("<img src=\"stars.png\" alt=\"Stars\">\n")
-    f.write("<img src=\"ships.png\" alt=\"Stars\">\n")
-    f.write("<img src=\"economy.png\" alt=\"Stars\">\n")
-    f.write("<img src=\"industry.png\" alt=\"Stars\">\n")
-    f.write("<img src=\"science.png\" alt=\"Stars\">\n")
-    f.write("</p1>\n")
+#    f.write("<p1>\n")
+#    f.write("<img src=\"stars.png\" alt=\"Stars\">\n")
+#    f.write("<img src=\"ships.png\" alt=\"Stars\">\n")
+#    f.write("<img src=\"economy.png\" alt=\"Stars\">\n")
+#    f.write("<img src=\"industry.png\" alt=\"Stars\">\n")
+#    f.write("<img src=\"science.png\" alt=\"Stars\">\n")
+#    f.write("</p1>\n")
     
     f.write("<h1>\n")
     f.write("System Trades\n")
