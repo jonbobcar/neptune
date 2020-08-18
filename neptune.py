@@ -182,3 +182,4 @@ if file_exists:
 
 with open(historical, "w") as file:
     file.write(json.dumps(players, indent=2))
+    
