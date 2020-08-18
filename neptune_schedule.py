@@ -6,6 +6,7 @@ import schedule
 
 def job():
     import neptune
+    import stats_plotter
     import neptune_to_html
     print("Ran the job")
 
