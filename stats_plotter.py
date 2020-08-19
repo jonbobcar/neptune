@@ -38,7 +38,7 @@ time = []
 for entry in t:
     time.append(datetime.datetime.strptime(entry, "%Y-%m-%d %H:%M:%S.%f").strftime("%A %H:%M"))
 
-print(time)
+print(time[-1])
 
 csv_array = csv_array[...,1:]
 csv_array = csv_array.astype(np.int)
@@ -81,3 +81,5 @@ for plot in range(len(plots)):
 
 
     fig.savefig(plots[plot] + ".png")
+
+print("stats_plotter.py")

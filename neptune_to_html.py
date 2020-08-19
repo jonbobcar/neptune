@@ -39,3 +39,5 @@ with open(path + "index.html", "w") as f:
     f.write("</p1>\n")
     f.write("</body>\n")
     f.write("</html>\n")
+
+    print("neptune_to_html.py")

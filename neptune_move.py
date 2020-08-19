@@ -6,3 +6,5 @@ shutil.copy("/home/jonathon/neptune/ships.png", "/var/www/html/jonbobcar.com/pub
 shutil.copy("/home/jonathon/neptune/economy.png", "/var/www/html/jonbobcar.com/public_html/economy.png")
 shutil.copy("/home/jonathon/neptune/industry.png", "/var/www/html/jonbobcar.com/public_html/industry.png")
 shutil.copy("/home/jonathon/neptune/science.png", "/var/www/html/jonbobcar.com/public_html/science.png")
+
+print("neptune_move.py")
