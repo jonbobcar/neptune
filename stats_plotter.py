@@ -69,7 +69,7 @@ for plot in range(len(plots)):
     for _ in range(number_of_players):
         ax.plot(time, csv_array[back_ticks:, plot::5])
 
-    fig.autofmt_xdate(rotation=45)
+    fig.autofmt_xdate(rotation=60)
     
 
     ax.set(title=plots[plot])
