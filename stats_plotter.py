@@ -65,7 +65,7 @@ for plot in range(len(plots)):
     plt.rc('lines', linewidth=3)
     plt.rc('axes', prop_cycle=(cycler('color', colors[0:number_of_players]) +
                            cycler('linestyle', lines[0:number_of_players])))
-    fig, ax = plt.subplots(figsize=(6,5))
+    fig, ax = plt.subplots(figsize=(9,6))
     for _ in range(number_of_players):
         ax.plot(time, csv_array[back_ticks:, plot::5])
 
