@@ -3,8 +3,6 @@ import schedule
 import shutil
 import os
 
-print(os.environ)
-
 def job():
     import neptune
     import stats_plotter
