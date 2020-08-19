@@ -8,6 +8,8 @@ with open(path + "trades.txt", "r") as f:
 with open(path + "neptune.csv", "r") as f:
     positions = f.readlines()
 
+positions.pop(1)
+
 with open(path + "index.html", "w") as f:
     f.write("<!DOCTYPE html>\n")
     f.write("<html>\n")
