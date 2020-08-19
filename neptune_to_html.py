@@ -15,7 +15,7 @@ with open(path + "index.html", "w") as f:
     f.write("<html>\n")
     f.write("<body>\n")
     f.write("<h1>\n")
-    f.write("Positions")
+    f.write("positions")
     f.write("</h1>\n")
     for line in positions:
         f.write("<p>" + line + "</p>")
@@ -29,11 +29,11 @@ with open(path + "index.html", "w") as f:
     f.write("</p1>\n")
     
     f.write("<h1>\n")
-    f.write("System Trades\n")
+    f.write("system trades\n")
     f.write("</h1>\n")
     
     f.write("<p1>\n")
-    f.write("Most Recent First")
+    f.write("most recent first")
     for line in reversed(trades):
         f.write("<p>" + line + "</p>")
     f.write("</p1>\n")
