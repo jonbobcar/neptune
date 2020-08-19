@@ -5,9 +5,6 @@ import os
 
 print(os.environ)
 
-# cron job to copy index.html:
-# */5 * * * * cp /home/jonathon/neptune/index.html /var/www/html/jonbobcar.com/public_html/
-
 def job():
     import neptune
     import stats_plotter
