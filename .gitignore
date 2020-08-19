@@ -1,3 +1,10 @@
+# Project Specific
+*.png 
+*.csv
+*.html 
+*.txt 
+*.json 
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
