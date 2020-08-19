@@ -30,7 +30,7 @@ for line in csv_stats:
 
 csv_array = np.reshape(csv_line, (i, int(len(fieldnames))))
 
-back_ticks = -120
+back_ticks = -24
 
 t = csv_array[back_ticks:,0]
 time = []
