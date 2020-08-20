@@ -31,7 +31,7 @@ def nep_plot():
 
     csv_array = np.reshape(csv_line, (i, int(len(fieldnames))))
 
-    back_ticks = -24
+    back_ticks = -48
 
     t = csv_array[back_ticks:,0]
     time = []
