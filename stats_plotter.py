@@ -49,6 +49,10 @@ def nep_plot():
     industry = csv_array[back_ticks:,3::5]
     science = csv_array[back_ticks:,4::5]
 
+    with open(path + "win.txt") as f:
+        victory = int(f.read())
+    victory = len(time) * [victory]
+
     plots = ["stars", "ships", "economy", "industry", "science"]
     colors = [
         "blue", "cyan", "lime", "gold", 
@@ -69,6 +73,12 @@ def nep_plot():
         fig, ax = plt.subplots(figsize=(9,6))
         for _ in range(number_of_players):
             ax.plot(time, csv_array[back_ticks:, plot::5])
+        
+        print(plot)
+
+        if plots[plot] == "stars":
+            ax.plot(time, victory, linestyle="solid", color="black")
+
 
         fig.autofmt_xdate(rotation=60)
         
@@ -84,3 +94,6 @@ def nep_plot():
         fig.savefig(plots[plot] + ".png")
 
     print("stats_plotter.py")
+
+if __name__ == "__main__":
+    nep_plot()

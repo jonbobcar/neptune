@@ -14,6 +14,10 @@ def nep_get():
     with urllib.request.urlopen(url) as url:
         data = json.loads(url.read().decode())
 
+    if not os.path.isfile(path + "win.txt"):
+        with open(path + "win.txt", "w") as f:
+            f.write(str(data["stars_for_victory"]))
+
     class Player():
         def __init__(self, uid):
             uid = str(uid)
@@ -185,3 +189,6 @@ def nep_get():
         file.write(json.dumps(players, indent=2))
         
     print("neptune.py")
+
+if __name__ == "__main__":
+    nep_get()
