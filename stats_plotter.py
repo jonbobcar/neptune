@@ -31,11 +31,11 @@ def nep_plot():
 
     csv_array = np.reshape(csv_line, (i, int(len(fieldnames))))
 
-    # with np.nditer(csv_array, op_flags=["readwrite"]) as it:
-    #     for element in it:
-    #         if element == "0":
-    #             element[...] = NaN
-    #             print("nanned")
+    with np.nditer(csv_array, op_flags=["readwrite"]) as it:
+        for element in it:
+            if element == "0":
+                element[...] = float("NaN")
+                print("nanned")
     
     print(csv_array)
 
@@ -50,7 +50,7 @@ def nep_plot():
     print(time[-1])
 
     csv_array = csv_array[...,1:]
-    csv_array = csv_array.astype(np.int)
+    csv_array = csv_array.astype(np.float)
     stars = csv_array[back_ticks:, 0::5]
     ships = csv_array[back_ticks:, 1::5]
     economy = csv_array[back_ticks:,2::5]
