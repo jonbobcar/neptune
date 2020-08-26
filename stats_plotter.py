@@ -86,7 +86,7 @@ def nep_plot():
 
         if plots[plot] == "stars":
             ax.plot(time, victory, linestyle="solid", color="black", label="Stars for Victory")
-            plt.text(time[-5], victory[0]*1.01, "Stars for Victory: {}".format(victory[0]))
+            plt.text(time[-9], victory[0]*1.01, "Stars for Victory: {}".format(victory[0]))
 
 
         fig.autofmt_xdate(rotation=60)
