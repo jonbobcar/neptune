@@ -89,7 +89,7 @@ def nep_plot():
             plt.text(time[-9], victory[0]*1.01, "Stars for Victory: {}".format(victory[0]))
 
 
-        fig.autofmt_xdate(rotation=60)
+        plt.setp(ax.xaxis.get_majorticklabels(), rotation=60, ha="right", rotation_mode="anchor")
         
 
         ax.set(title=plots[plot])
