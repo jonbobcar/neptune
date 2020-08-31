@@ -169,19 +169,19 @@ def nep_get():
         file.write(datetime.datetime.now().strftime("%A %H:%M\n"))
         file.write(table)
 
-    players = {datetime.datetime.now().strftime("%Y%m%d %H"):
-                data["players"]}
+    # players = {datetime.datetime.now().strftime("%Y%m%d %H"):
+    #             data["players"]}
 
-    historical = path + "historical.txt"
+    # historical = path + "historical.txt"
 
-    file_exists = os.path.isfile(historical)
+    # file_exists = os.path.isfile(historical)
 
-    if file_exists:
-        with open(historical, "r") as file:
-            players_history = json.loads(file.read())
-            players.update(players_history)
+    # if file_exists:
+    #     with open(historical, "r") as file:
+    #         players_history = json.loads(file.read())
+    #         players.update(players_history)
 
-    with open(historical, "w") as file:
-        file.write(json.dumps(players, indent=2))
+    # with open(historical, "w") as file:
+    #     file.write(json.dumps(players, indent=2))
         
     print("neptune.py")
