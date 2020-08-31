@@ -31,7 +31,15 @@ def nep_plot():
 
     csv_array = np.reshape(csv_line, (i, int(len(fieldnames))))
 
-    back_ticks = -24
+    with np.nditer(csv_array, op_flags=["readwrite"]) as it:
+        for element in it:
+            if element == "0":
+                element[...] = float("NaN")
+                print("nanned")
+    
+    print(csv_array)
+
+    back_ticks = -48
 
     t = csv_array[back_ticks:,0]
     time = []
@@ -42,12 +50,16 @@ def nep_plot():
     print(time[-1])
 
     csv_array = csv_array[...,1:]
-    csv_array = csv_array.astype(np.int)
+    csv_array = csv_array.astype(np.float)
     stars = csv_array[back_ticks:, 0::5]
     ships = csv_array[back_ticks:, 1::5]
     economy = csv_array[back_ticks:,2::5]
     industry = csv_array[back_ticks:,3::5]
     science = csv_array[back_ticks:,4::5]
+
+    with open(path + "win.txt") as f:
+        victory = int(f.read())
+    victory = len(time) * [victory]
 
     plots = ["stars", "ships", "economy", "industry", "science"]
     colors = [
@@ -55,8 +67,8 @@ def nep_plot():
         "orange", "red", "fuchsia", "purple"
         ]
     lines = [
-        (0, (3, 5)), (0, (4, 5)), (0, (5, 5)), (0, (6, 5)),
-        (0, (5, 3)), (0, (5, 4)), (0, (5, 5)), (0, (5, 6))
+        (0, (3, 2)), (1, (3, 2)), (2, (3, 2)), (3, (3, 2)),
+        (8, (3, 2)), (5, (3, 2)), (6, (3, 2)), (7, (3, 2))
         ]
     markers = [] 
 
@@ -69,8 +81,15 @@ def nep_plot():
         fig, ax = plt.subplots(figsize=(9,6))
         for _ in range(number_of_players):
             ax.plot(time, csv_array[back_ticks:, plot::5])
+        
+        print(plot)
 
-        fig.autofmt_xdate(rotation=60)
+        if plots[plot] == "stars":
+            ax.plot(time, victory, linestyle="solid", color="black", label="Stars for Victory")
+            plt.text(time[-9], victory[0]*1.01, "Stars for Victory: {}".format(victory[0]))
+
+
+        plt.setp(ax.xaxis.get_majorticklabels(), rotation=60, ha="right", rotation_mode="anchor")
         
 
         ax.set(title=plots[plot])
@@ -84,3 +103,6 @@ def nep_plot():
         fig.savefig(plots[plot] + ".png")
 
     print("stats_plotter.py")
+
+if __name__ == "__main__":
+    nep_plot()
